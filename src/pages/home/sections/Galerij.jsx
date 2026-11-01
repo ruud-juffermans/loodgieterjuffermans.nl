@@ -11,7 +11,7 @@ const PREVIEW = PROJECTS.slice(0, 4);
 /** Homepage preview of the gallery: four tiles and a link to the full page. */
 export default function Galerij() {
   return (
-    <Section.Container id="galerij" tone="light">
+    <Section.Container id="galerij" tone="paper">
       <Reveal sx={{ textAlign: "center" }}>
         <Section.Eyebrow>Galerij</Section.Eyebrow>
         <Section.Heading align="center">Mijn werk in beeld</Section.Heading>

@@ -21,8 +21,8 @@ const Home = () => {
       <OverMij />
       <Reviews />
       <Diensten />
-      <Galerij />
       <Werkgebied />
+      <Galerij />
       <FAQ />
       <Contact />
     </>

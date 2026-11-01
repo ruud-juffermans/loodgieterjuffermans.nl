@@ -9,6 +9,7 @@ import { getCategoryLabel } from "@data/projects";
  */
 export default function ProjectCard({ project, sizes = "(min-width: 1024px) 25vw, (min-width: 480px) 50vw, 100vw" }) {
   const label = getCategoryLabel(project.category);
+  const hasImage = Boolean(project.image);
 
   return (
     <Box
@@ -19,7 +20,7 @@ export default function ProjectCard({ project, sizes = "(min-width: 1024px) 25vw
         overflow: "hidden",
         borderRadius: "20px",
         aspectRatio: "4 / 3",
-        backgroundColor: "paperTone.100",
+        backgroundColor: "background.default",
         border: `1px solid ${alpha(theme.palette.ink[900], 0.08)}`,
         transition: "transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease",
         "&:hover": {
@@ -49,14 +50,18 @@ export default function ProjectCard({ project, sizes = "(min-width: 1024px) 25vw
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            color: alpha(theme.palette.ink[900], 0.25),
-            background: `linear-gradient(135deg, ${theme.palette.paperTone[100]} 0%, ${alpha(theme.palette.accent[100], 0.6)} 100%)`,
+            // Keep the icon in the upper part so it clears the caption
+            pb: 7,
+            color: alpha(theme.palette.brand[500], 0.35),
+            background: `linear-gradient(160deg, ${theme.palette.accent[50]} 0%, ${alpha(theme.palette.accent[100], 0.7)} 100%)`,
           })}
         >
-          <PhotoCameraOutlinedIcon sx={{ fontSize: 40 }} />
+          <PhotoCameraOutlinedIcon sx={{ fontSize: 36 }} />
         </Box>
       )}
 
+      {/* Over a photo the caption needs a scrim; over the placeholder it
+          sits on the light tile as plain text. */}
       <Typography
         component="figcaption"
         sx={(theme) => ({
@@ -65,9 +70,11 @@ export default function ProjectCard({ project, sizes = "(min-width: 1024px) 25vw
           right: 0,
           bottom: 0,
           p: 2,
-          pt: 5,
-          color: "common.white",
-          background: `linear-gradient(180deg, transparent 0%, ${alpha(theme.palette.ink[900], 0.85)} 100%)`,
+          pt: hasImage ? 4 : 2,
+          color: hasImage ? "common.white" : "text.primary",
+          background: hasImage
+            ? `linear-gradient(180deg, transparent 0%, ${alpha(theme.palette.ink[900], 0.7)} 100%)`
+            : "transparent",
         })}
       >
         <Box
@@ -78,7 +85,7 @@ export default function ProjectCard({ project, sizes = "(min-width: 1024px) 25vw
             fontWeight: 700,
             letterSpacing: "0.14em",
             textTransform: "uppercase",
-            color: "accent.300",
+            color: hasImage ? "accent.300" : "accent.700",
             mb: 0.5,
           }}
         >
@@ -96,7 +103,14 @@ export default function ProjectCard({ project, sizes = "(min-width: 1024px) 25vw
         >
           {project.title}
         </Box>
-        <Box component="span" sx={{ display: "block", fontSize: "0.875rem", color: "ink.200" }}>
+        <Box
+          component="span"
+          sx={{
+            display: "block",
+            fontSize: "0.875rem",
+            color: hasImage ? "ink.200" : "text.secondary",
+          }}
+        >
           {project.place}
         </Box>
       </Typography>

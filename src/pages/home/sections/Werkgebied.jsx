@@ -10,7 +10,7 @@ import { REGIONS } from "@data/regions";
 /** "Werkgebied" region cards, copied from the live site. */
 export default function Werkgebied() {
   return (
-    <Section.Container id="werkgebied" tone="paper">
+    <Section.Container id="werkgebied" tone="light">
       <Reveal sx={{ textAlign: "center" }}>
         <Section.Eyebrow>Werkgebied</Section.Eyebrow>
         <Section.Heading align="center">Haarlem, Heemstede en Bennebroek</Section.Heading>
@@ -35,7 +35,7 @@ export default function Werkgebied() {
             sx={(theme) => ({
               p: 3,
               borderRadius: "20px",
-              backgroundColor: "background.default",
+              backgroundColor: "paperTone.50",
               border: `1px solid ${alpha(theme.palette.ink[900], 0.08)}`,
               textAlign: "center",
               transition: "border-color 200ms ease, transform 200ms ease",
