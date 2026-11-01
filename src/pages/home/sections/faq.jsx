@@ -21,8 +21,8 @@ const FAQ_ITEMS = [
     links: [
       { label: "06 14 14 92 98", href: "tel:0614149298" },
       {
-        label: "info@loodgieterjuffermans.nl",
-        href: "mailto:info@loodgieterjuffermans.nl",
+        label: "ronjut@hotmail.nl",
+        href: "mailto:ronjut@hotmail.nl",
       },
     ],
   },

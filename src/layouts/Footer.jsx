@@ -70,7 +70,7 @@ export default function Footer() {
             </Button>
             <Button
               component="a"
-              href="mailto:info@loodgieterjuffermans.nl"
+              href="mailto:ronjut@hotmail.nl"
               variant="outlined"
               size="large"
               startIcon={<MailOutlineRoundedIcon />}
@@ -213,10 +213,10 @@ export default function Footer() {
               <Stack direction="row" spacing={1.5} alignItems="center">
                 <MailOutlineRoundedIcon sx={{ fontSize: 18, color: "accent.300" }} />
                 <Link
-                  href="mailto:info@loodgieterjuffermans.nl"
+                  href="mailto:ronjut@hotmail.nl"
                   sx={{ color: "ink.200", fontWeight: 400, "&:hover": { color: "accent.300" } }}
                 >
-                  info@loodgieterjuffermans.nl
+                  ronjut@hotmail.nl
                 </Link>
               </Stack>
               <Stack direction="row" spacing={1.5} alignItems="center">

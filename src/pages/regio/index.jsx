@@ -96,7 +96,7 @@ export default function RegioPage() {
               </Button>
               <Button
                 component="a"
-                href="mailto:info@loodgieterjuffermans.nl"
+                href="mailto:ronjut@hotmail.nl"
                 variant="outlined"
                 size="large"
                 startIcon={<MailOutlineRoundedIcon />}
