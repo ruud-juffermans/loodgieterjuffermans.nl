@@ -1,0 +1,16 @@
+# Loodgietersbedrijf Juffermans, static prerendered site served by nginx.
+# Deployed on Dokploy: the image is built from ./Dockerfile and Traefik routes
+# www.loodgieterjuffermans.nl (and the bare domain) to port 80 over
+# dokploy-network. Nothing to configure; there are no environment variables.
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    networks:
+      - dokploy-network
+
+networks:
+  dokploy-network:
+    external: true
