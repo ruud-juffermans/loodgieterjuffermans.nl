@@ -4,13 +4,16 @@ import Hero from './sections/Hero'
 import OverMij from './sections/OverMij'
 import Reviews from './sections/Reviews'
 import Diensten from './sections/Diensten'
+import Galerij from './sections/Galerij'
+import Werkgebied from './sections/Werkgebied'
 import FAQ from './sections/faq'
+import Contact from './sections/Contact'
 
 const Home = () => {
   return (
     <>
       <Seo
-        title="Loodgietersbedrijf Juffermans | Lood, zink & dakwerk in Haarlem e.o."
+        title="Loodgieter & dakdekker in Haarlem, Heemstede e.o. | Juffermans"
         description="Loodgietersbedrijf Juffermans — vakwerk in lood, zink en dakbedekking in Haarlem, Heemstede en omgeving. Eén aanspreekpunt, gratis offerte."
         path="/"
       />
@@ -18,7 +21,10 @@ const Home = () => {
       <OverMij />
       <Reviews />
       <Diensten />
+      <Galerij />
+      <Werkgebied />
       <FAQ />
+      <Contact />
     </>
   )
 }

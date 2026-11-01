@@ -1,19 +1,20 @@
 import * as React from "react";
 import { Link as RouterLink, useParams } from "react-router-dom";
-import { Box, Button, Link, Stack, Typography } from "@mui/material";
-import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded";
-import MailOutlineRoundedIcon from "@mui/icons-material/MailOutlineRounded";
+import { Box, Breadcrumbs, Link, Stack, Typography } from "@mui/material";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import Section from "@components/Section";
 import Seo from "@components/Seo";
+import { breadcrumbJsonLd } from "@components/Seo/jsonLd";
+import JsonLd from "@components/JsonLd";
 import Reveal from "@components/Reveal";
+import { BelDirectButton, WhatsAppButton } from "@components/CtaButtons";
 import NotFound from "@pages/not-found";
 import { REGIONS, getRegionBySlug } from "@data/regions";
 import { SERVICES } from "@data/services";
 
-import regioImage from "@assets/hero3.jpeg";
+import regioImage from "@assets/hero3.jpeg?w=1200&format=webp";
+import regioImageSet from "@assets/hero3.jpeg?w=480;800;1200&format=webp&as=srcset";
 
-const PHONE_NUMBER = "0614149298";
 const HEADER_HEIGHT = 88;
 
 export default function RegioPage() {
@@ -25,17 +26,40 @@ export default function RegioPage() {
   }
 
   const otherRegions = REGIONS.filter((r) => r.slug !== region.slug);
+  const path = `/regio/${region.slug}`;
+  const jsonLd = breadcrumbJsonLd([
+    { name: "Home", path: "/" },
+    { name: "Werkgebied", path: "/#werkgebied" },
+    { name: region.name, path },
+  ]);
 
   return (
     <Box sx={{ pt: `${HEADER_HEIGHT}px` }}>
       <Seo
         title={region.metaTitle}
         description={region.metaDescription}
-        path={`/regio/${region.slug}`}
+        path={path}
       />
+      <JsonLd data={jsonLd} />
 
       <Section.Container tone="paper">
         <Reveal>
+        <Breadcrumbs aria-label="Kruimelpad" sx={{ mb: 3, fontSize: "0.9375rem" }}>
+          <Link component={RouterLink} to="/" sx={{ color: "accent.700", fontWeight: 600 }}>
+            Home
+          </Link>
+          <Link
+            component={RouterLink}
+            to="/#werkgebied"
+            sx={{ color: "accent.700", fontWeight: 600 }}
+          >
+            Werkgebied
+          </Link>
+          <Typography component="span" sx={{ color: "text.secondary" }}>
+            {region.name}
+          </Typography>
+        </Breadcrumbs>
+
         <Section.Eyebrow>Werkgebied</Section.Eyebrow>
         <Typography variant="h2" component="h1" sx={{ color: "text.primary", mb: 3 }}>
           Loodgieter in {region.name}
@@ -54,55 +78,51 @@ export default function RegioPage() {
               <Section.Text key={paragraph}>{paragraph}</Section.Text>
             ))}
 
-            <Typography variant="h4" sx={{ mt: 4, mb: 2 }}>
-              Diensten in {region.name}
-            </Typography>
-            <Stack spacing={1.5}>
-              {SERVICES.map((service) => (
-                <Link
-                  key={service.slug}
-                  component={RouterLink}
-                  to={`/diensten/${service.slug}`}
-                  sx={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: 0.5,
-                    fontWeight: 600,
-                    color: "accent.700",
-                    "& > svg": { transition: "transform 150ms ease", fontSize: 18 },
-                    "&:hover > svg": { transform: "translateX(3px)" },
-                  }}
-                >
-                  {service.title}
-                  <ArrowForwardRoundedIcon />
-                </Link>
-              ))}
-            </Stack>
+            {SERVICES.map((service) => {
+              const copy = region.serviceCopy?.[service.slug];
+              if (!copy) return null;
+              return (
+                <Box key={service.slug} sx={{ mt: 4 }}>
+                  <Typography variant="h4" component="h2" sx={{ mb: 1.5 }}>
+                    {copy.heading}
+                  </Typography>
+                  <Section.Text>{copy.text}</Section.Text>
+                  <Link
+                    component={RouterLink}
+                    to={`/diensten/${service.slug}`}
+                    sx={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 0.5,
+                      fontWeight: 600,
+                      color: "accent.700",
+                      "& > svg": { transition: "transform 150ms ease", fontSize: 18 },
+                      "&:hover > svg": { transform: "translateX(3px)" },
+                    }}
+                  >
+                    Meer over {service.title.toLowerCase()} in {region.name}
+                    <ArrowForwardRoundedIcon />
+                  </Link>
+                </Box>
+              );
+            })}
+
+            {region.housing ? (
+              <Box sx={{ mt: 4 }}>
+                <Typography variant="h4" component="h2" sx={{ mb: 1.5 }}>
+                  Woningen in {region.name}
+                </Typography>
+                <Section.Text>{region.housing}</Section.Text>
+              </Box>
+            ) : null}
 
             <Stack
               direction={{ xs: "column", sm: "row" }}
               spacing={2}
               sx={{ mt: 5 }}
             >
-              <Button
-                component="a"
-                href={`tel:${PHONE_NUMBER}`}
-                variant="contained"
-                color="secondary"
-                size="large"
-                startIcon={<PhoneRoundedIcon />}
-              >
-                Bel 06 14 14 92 98
-              </Button>
-              <Button
-                component="a"
-                href="mailto:ronjut@hotmail.nl"
-                variant="outlined"
-                size="large"
-                startIcon={<MailOutlineRoundedIcon />}
-              >
-                Vraag een offerte aan
-              </Button>
+              <BelDirectButton />
+              <WhatsAppButton />
             </Stack>
           </Box>
 
@@ -110,6 +130,8 @@ export default function RegioPage() {
             <Box
               component="img"
               src={regioImage}
+              srcSet={regioImageSet}
+              sizes="(min-width: 768px) 42vw, 100vw"
               alt={`Lood-, zink- en dakwerk in ${region.name}`}
               loading="lazy"
               decoding="async"

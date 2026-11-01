@@ -34,12 +34,17 @@ export default function Reveal({ children, delay = 0, sx, ...props }) {
   return (
     <Box
       ref={ref}
-      sx={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? "none" : "translateY(28px)",
+      sx={(theme) => ({
+        // Prerendered HTML stays visible without JavaScript; the inline
+        // script in index.html adds html.js, which enables the hidden start.
+        ".js &": {
+          opacity: visible ? 1 : 0,
+          transform: visible ? "none" : "translateY(28px)",
+        },
         transition: `opacity 700ms ease ${delay}ms, transform 700ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms`,
-        ...sx,
-      }}
+        // sx may be an object or a theme callback, like any MUI sx prop
+        ...(typeof sx === "function" ? sx(theme) : sx),
+      })}
       {...props}
     >
       {children}

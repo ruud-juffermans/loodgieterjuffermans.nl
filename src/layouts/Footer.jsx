@@ -1,21 +1,15 @@
 import * as React from "react";
-import { Box, Button, Container, Link, Stack, Typography } from "@mui/material";
+import { Box, Container, Link, Stack, Typography } from "@mui/material";
 import { alpha } from "@mui/material/styles";
 import { Link as RouterLink } from "react-router-dom";
 import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded";
 import MailOutlineRoundedIcon from "@mui/icons-material/MailOutlineRounded";
 import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import { BelDirectButton, WhatsAppButton } from "@components/CtaButtons";
 import { SERVICES } from "@data/services";
 import { REGIONS } from "@data/regions";
-
-const PHONE_NUMBER = "0614149298";
-
-const SECTION_LINKS = [
-  { label: "Over mij", to: "/#over-mij" },
-  { label: "Reviews", to: "/#reviews" },
-  { label: "Diensten", to: "/#diensten" },
-  { label: "FAQ", to: "/#faq" },
-];
+import { EMAIL, PHONE_DISPLAY, PHONE_TEL, WHATSAPP_URL } from "@data/contact";
 
 const footerLinkSx = {
   color: "ink.200",
@@ -34,14 +28,14 @@ export default function Footer() {
       })}
     >
       {/* Contact band */}
-      <Container maxWidth="lg">
+      <Container maxWidth="xl" sx={{ py: { xs: 6, md: 8 } }}>
         <Stack
           direction={{ xs: "column", md: "row" }}
           alignItems={{ xs: "flex-start", md: "center" }}
           justifyContent="space-between"
           spacing={4}
           sx={{
-            py: { xs: 8, md: 10 },
+            pb: { xs: 6, md: 8 },
             borderBottom: `1px solid ${alpha("#FFFFFF", 0.1)}`,
           }}
         >
@@ -49,7 +43,7 @@ export default function Footer() {
             <Typography variant="overline" sx={{ color: "accent.300" }}>
               Direct contact
             </Typography>
-            <Typography variant="h3" sx={{ color: "common.white", mt: 1 }}>
+            <Typography variant="h3" component="h2" sx={{ color: "common.white", mt: 1 }}>
               Lekkage of ander loodgieterswerk?
             </Typography>
             <Typography sx={{ color: "ink.200", mt: 1.5, maxWidth: 480 }}>
@@ -58,34 +52,10 @@ export default function Footer() {
             </Typography>
           </Box>
           <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
-            <Button
-              component="a"
-              href={`tel:${PHONE_NUMBER}`}
-              variant="contained"
-              color="secondary"
-              size="large"
-              startIcon={<PhoneRoundedIcon />}
-            >
-              06 14 14 92 98
-            </Button>
-            <Button
-              component="a"
-              href="mailto:ronjut@hotmail.nl"
-              variant="outlined"
-              size="large"
-              startIcon={<MailOutlineRoundedIcon />}
-              sx={{
-                color: "common.white",
-                borderColor: alpha("#FFFFFF", 0.35),
-                "&:hover": {
-                  borderColor: "common.white",
-                  backgroundColor: alpha("#FFFFFF", 0.08),
-                },
-              }}
-            >
-              E-mail
-            </Button>
+            <BelDirectButton />
+            <WhatsAppButton />
           </Stack>
+
         </Stack>
 
         {/* Link columns */}
@@ -104,8 +74,9 @@ export default function Footer() {
           <Box>
             <Typography
               sx={{
-                fontFamily: '"Fraunces", Georgia, serif',
+                fontFamily: '"Plus Jakarta Sans", "Inter", sans-serif',
                 fontSize: "1.5rem",
+                fontWeight: 700,
                 color: "common.white",
               }}
             >
@@ -134,17 +105,17 @@ export default function Footer() {
                 mb: 2,
               }}
             >
-              Secties
+              Diensten
             </Typography>
             <Stack spacing={1.25}>
-              {SECTION_LINKS.map((l) => (
+              {SERVICES.map((service) => (
                 <Link
-                  key={l.to}
+                  key={service.slug}
                   component={RouterLink}
-                  to={l.to}
+                  to={`/diensten/${service.slug}`}
                   sx={footerLinkSx}
                 >
-                  {l.label}
+                  {service.title}
                 </Link>
               ))}
             </Stack>
@@ -161,19 +132,9 @@ export default function Footer() {
                 mb: 2,
               }}
             >
-              Diensten &amp; regio
+              Werkgebied
             </Typography>
             <Stack spacing={1.25}>
-              {SERVICES.map((service) => (
-                <Link
-                  key={service.slug}
-                  component={RouterLink}
-                  to={`/diensten/${service.slug}`}
-                  sx={footerLinkSx}
-                >
-                  {service.title}
-                </Link>
-              ))}
               {REGIONS.map((region) => (
                 <Link
                   key={region.slug}
@@ -181,7 +142,7 @@ export default function Footer() {
                   to={`/regio/${region.slug}`}
                   sx={footerLinkSx}
                 >
-                  Loodgieter {region.name}
+                  {region.name}
                 </Link>
               ))}
             </Stack>
@@ -204,33 +165,42 @@ export default function Footer() {
               <Stack direction="row" spacing={1.5} alignItems="center">
                 <PhoneRoundedIcon sx={{ fontSize: 18, color: "accent.300" }} />
                 <Link
-                  href={`tel:${PHONE_NUMBER}`}
+                  href={`tel:${PHONE_TEL}`}
                   sx={{ color: "ink.200", fontWeight: 400, "&:hover": { color: "accent.300" } }}
                 >
-                  06 14 14 92 98
+                  {PHONE_DISPLAY}
                 </Link>
               </Stack>
               <Stack direction="row" spacing={1.5} alignItems="center">
                 <MailOutlineRoundedIcon sx={{ fontSize: 18, color: "accent.300" }} />
                 <Link
-                  href="mailto:ronjut@hotmail.nl"
+                  href={`mailto:${EMAIL}`}
                   sx={{ color: "ink.200", fontWeight: 400, "&:hover": { color: "accent.300" } }}
                 >
-                  ronjut@hotmail.nl
+                  {EMAIL}
                 </Link>
               </Stack>
               <Stack direction="row" spacing={1.5} alignItems="center">
-                <PlaceOutlinedIcon sx={{ fontSize: 18, color: "accent.300" }} />
-                <Typography variant="body2" sx={{ color: "ink.200" }}>
-                  Haarlem, Heemstede e.o.
-                </Typography>
+                <WhatsAppIcon sx={{ fontSize: 18, color: "accent.300" }} />
+                <Link
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{ color: "ink.200", fontWeight: 400, "&:hover": { color: "accent.300" } }}
+                >
+                  WhatsApp
+                </Link>
               </Stack>
             </Stack>
           </Box>
         </Box>
 
         {/* Bottom bar */}
-        <Box
+        <Stack
+          direction={{ xs: "column", sm: "row" }}
+          justifyContent="space-between"
+          alignItems={{ xs: "flex-start", sm: "center" }}
+          spacing={1.5}
           sx={{
             py: 3,
             borderTop: `1px solid ${alpha("#FFFFFF", 0.1)}`,
@@ -246,7 +216,24 @@ export default function Footer() {
             </Link>
             . Alle rechten voorbehouden.
           </Typography>
-        </Box>
+          <Stack direction="row" spacing={3}>
+            <Link
+              component={RouterLink}
+              to="/privacy"
+              variant="caption"
+              sx={{ color: "ink.300", "&:hover": { color: "accent.300" } }}
+            >
+              Privacy
+            </Link>
+            <Link
+              href="/sitemap.xml"
+              variant="caption"
+              sx={{ color: "ink.300", "&:hover": { color: "accent.300" } }}
+            >
+              Sitemap
+            </Link>
+          </Stack>
+        </Stack>
       </Container>
     </Box>
   );

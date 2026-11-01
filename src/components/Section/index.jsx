@@ -1,10 +1,10 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { alpha } from "@mui/material/styles";
 
 /**
  * Section building blocks for the premium look:
  * - Eyebrow: small accent overline label above headings
- * - Heading: serif display heading
+ * - Heading: bold display heading
  * - Subheading / Text: measured body copy
  * - Container: vertical rhythm + optional tone ("light" | "paper" | "dark")
  */
@@ -14,7 +14,7 @@ const SectionEyebrow = ({ children, onDark = false }) => (
         variant="overline"
         component="p"
         sx={{
-            color: onDark ? "accent.300" : "accent.600",
+            color: onDark ? "accent.300" : "accent.700",
             mb: 2,
         }}
     >
@@ -68,11 +68,7 @@ const SectionText = ({ children, onDark = false }) => (
 
 const TONE_STYLES = {
     light: { backgroundColor: "background.default" },
-    paper: {
-        backgroundColor: "paperTone.100",
-        backgroundImage: (theme) =>
-            `linear-gradient(180deg, ${alpha(theme.palette.accent[50], 0.7)} 0%, transparent 32%)`,
-    },
+    paper: { backgroundColor: "paperTone.100" },
     dark: {
         backgroundColor: "ink.800",
         backgroundImage: (theme) => `
@@ -93,18 +89,17 @@ const SectionContainer = ({ children, tone = "light", id, sx }) => {
                 ...sx,
             }}
         >
-            <Box
+            {/* Same container as the header and footer so all edges line up */}
+            <Container
+                maxWidth="xl"
                 sx={{
                     display: "flex",
                     flexDirection: "column",
-                    maxWidth: "1200px",
-                    mx: "auto",
-                    px: { xs: 2.5, sm: 4, lg: 5 },
                     py: { xs: 8, sm: 12, lg: 14 },
                 }}
             >
                 {children}
-            </Box>
+            </Container>
         </Box>
     );
 };

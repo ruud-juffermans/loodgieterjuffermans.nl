@@ -65,7 +65,7 @@ export const grey = {
   900: '#12181D',
 };
 
-const serif = '"Fraunces", Georgia, serif';
+const display = '"Plus Jakarta Sans", "Inter", sans-serif';
 const sans = '"Inter", "Helvetica Neue", Arial, sans-serif';
 
 const getDesignTokens = () => ({
@@ -96,6 +96,12 @@ const getDesignTokens = () => ({
       main: '#27AE60',
       dark: '#1E8449',
     },
+    // Darker than WhatsApp's own green so white text passes WCAG AA (5.4:1)
+    whatsapp: {
+      main: '#0F7A3A',
+      dark: '#0B5F2D',
+      contrastText: '#FFFFFF',
+    },
     grey,
     divider: alpha(ink[900], 0.1),
     background: {
@@ -118,29 +124,29 @@ const getDesignTokens = () => ({
   typography: {
     fontFamily: sans,
     h1: {
-      fontFamily: serif,
+      fontFamily: display,
       fontSize: 'clamp(2.5rem, 6vw, 4.25rem)',
-      fontWeight: 500,
+      fontWeight: 700,
       lineHeight: 1.08,
       letterSpacing: '-0.02em',
     },
     h2: {
-      fontFamily: serif,
+      fontFamily: display,
       fontSize: 'clamp(1.9rem, 4vw, 2.75rem)',
-      fontWeight: 500,
+      fontWeight: 700,
       lineHeight: 1.15,
       letterSpacing: '-0.015em',
     },
     h3: {
-      fontFamily: serif,
+      fontFamily: display,
       fontSize: 'clamp(1.5rem, 3vw, 2rem)',
-      fontWeight: 500,
+      fontWeight: 700,
       lineHeight: 1.2,
     },
     h4: {
-      fontFamily: serif,
+      fontFamily: display,
       fontSize: '1.5rem',
-      fontWeight: 500,
+      fontWeight: 700,
       lineHeight: 1.35,
     },
     h5: {
@@ -178,7 +184,7 @@ const getDesignTokens = () => ({
       letterSpacing: '0.02em',
     },
     overline: {
-      fontWeight: 600,
+      fontWeight: 700,
       fontSize: '0.8125rem',
       letterSpacing: '0.22em',
       textTransform: 'uppercase',
@@ -243,9 +249,12 @@ export default function getTheme() {
           root: {
             boxSizing: 'border-box',
             transition: 'all 160ms ease',
+            // Two-tone ring: dark outline with a white inner ring, visible on
+            // light and dark backgrounds alike
             '&:focus-visible': {
-              outline: `3px solid ${alpha(accent[400], 0.55)}`,
+              outline: `3px solid ${ink[800]}`,
               outlineOffset: '2px',
+              boxShadow: '0 0 0 2px #FFFFFF',
             },
           },
         },
@@ -344,7 +353,7 @@ export default function getTheme() {
             cursor: 'pointer',
             transition: 'color 150ms ease',
             '&:hover': {
-              color: accent[600],
+              color: accent[700],
             },
           },
         },
@@ -359,7 +368,7 @@ export default function getTheme() {
       MuiRating: {
         styleOverrides: {
           iconFilled: {
-            color: '#D9A036',
+            color: '#B8860B',
           },
         },
       },

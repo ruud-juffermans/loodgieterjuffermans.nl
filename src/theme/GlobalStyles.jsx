@@ -22,6 +22,11 @@ const GlobalStyles = () => {
           img: {
             maxWidth: "100%",
           },
+          // Headings and sections receive focus after a route change so the
+          // page is announced; they are not interactive, so no ring.
+          "main [tabindex='-1']:focus": {
+            outline: "none",
+          },
           "@keyframes fadeUp": {
             from: { opacity: 0, transform: "translateY(28px)" },
             to: { opacity: 1, transform: "none" },
@@ -29,11 +34,6 @@ const GlobalStyles = () => {
           "@keyframes heroZoom": {
             from: { transform: "scale(1)" },
             to: { transform: "scale(1.08)" },
-          },
-          "@keyframes glowDrift": {
-            "0%": { transform: "translate(0, 0)" },
-            "50%": { transform: "translate(6%, -4%)" },
-            "100%": { transform: "translate(0, 0)" },
           },
           "@media (prefers-reduced-motion: reduce)": {
             "*, *::before, *::after": {
