@@ -1,0 +1,55 @@
+{
+  "$comment": "Agent discovery file for Loodgietersbedrijf Juffermans. Declares what AI browsing agents may do on this site. Emerging convention, not a standard. Last updated 2026-11-01.",
+  "version": "1.0",
+  "site": "https://www.loodgieterjuffermans.nl",
+  "name": "Loodgietersbedrijf Juffermans",
+  "language": "nl",
+  "updated": "2026-11-01",
+  "discovery": {
+    "llms_txt": "https://www.loodgieterjuffermans.nl/llms.txt",
+    "llms_full_txt": "https://www.loodgieterjuffermans.nl/llms-full.txt",
+    "sitemap": "https://www.loodgieterjuffermans.nl/sitemap.xml",
+    "robots": "https://www.loodgieterjuffermans.nl/robots.txt"
+  },
+  "permissions": {
+    "read": "allow",
+    "summarize": "allow",
+    "cite": "allow",
+    "citation_attribution": "Loodgietersbedrijf Juffermans, https://www.loodgieterjuffermans.nl",
+    "train": "allow",
+    "forms": "none"
+  },
+  "actions": [
+    {
+      "id": "call",
+      "label": "Bellen voor advies, afspraak of offerte",
+      "type": "tel",
+      "target": "tel:+31614149298",
+      "hours": "Maandag t/m vrijdag 08:00-18:00; zaterdag op afspraak; bij spoed ook buiten kantoortijden"
+    },
+    {
+      "id": "whatsapp",
+      "label": "WhatsApp-bericht sturen",
+      "type": "url",
+      "target": "https://wa.me/31614149298"
+    },
+    {
+      "id": "email",
+      "label": "E-mail sturen voor een offerte of advies",
+      "type": "mailto",
+      "target": "mailto:ronjut@hotmail.nl"
+    }
+  ],
+  "business": {
+    "type": "Plumber",
+    "services": ["zinkwerk", "loodwerk", "dakdekken"],
+    "area_served": ["Haarlem", "Heemstede", "Bennebroek", "Noord-Holland"],
+    "address": {
+      "street": "Schoollaan 57",
+      "postal_code": "2121 GC",
+      "city": "Bennebroek",
+      "country": "NL"
+    },
+    "quote": "Gratis offerte na een eerste inspectie"
+  }
+}

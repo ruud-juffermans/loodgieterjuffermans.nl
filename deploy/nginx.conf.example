@@ -1,0 +1,48 @@
+# Loodgietersbedrijf Juffermans - nginx server blocks for the prerendered build.
+# The live server runs nginx, so public/.htaccess is ignored there; this is
+# the equivalent configuration. Adjust root, certificate paths and logging.
+
+# http and bare domain -> https://www
+server {
+    listen 80;
+    listen [::]:80;
+    server_name loodgieterjuffermans.nl www.loodgieterjuffermans.nl;
+    return 301 https://www.loodgieterjuffermans.nl$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name loodgieterjuffermans.nl;
+    # ssl_certificate     /etc/letsencrypt/live/loodgieterjuffermans.nl/fullchain.pem;
+    # ssl_certificate_key /etc/letsencrypt/live/loodgieterjuffermans.nl/privkey.pem;
+    return 301 https://www.loodgieterjuffermans.nl$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name www.loodgieterjuffermans.nl;
+    # ssl_certificate     /etc/letsencrypt/live/loodgieterjuffermans.nl/fullchain.pem;
+    # ssl_certificate_key /etc/letsencrypt/live/loodgieterjuffermans.nl/privkey.pem;
+
+    root /var/www/loodgieterjuffermans.nl/dist;
+    index index.html;
+    charset utf-8;
+
+    # Pages from the previous site that no longer exist
+
+    # Hashed build assets never change
+    location /assets/ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+
+    # /diensten/zinkwerk -> diensten/zinkwerk.html; unknown paths are a real 404
+    location / {
+        try_files $uri $uri.html $uri/index.html =404;
+        add_header Cache-Control "public, max-age=600";
+    }
+
+    error_page 404 /404.html;
+}

@@ -1,3 +1,91 @@
+# robots.txt — Loodgietersbedrijf Juffermans
+# https://www.loodgieterjuffermans.nl
+# AI crawler access policy — last updated: 2026-11-01
+#
+# Policy: this is a local business that wants to be found and cited by
+# search engines AND AI assistants (ChatGPT, Claude, Perplexity, Gemini,
+# Copilot, Apple Intelligence, Meta AI). All AI crawlers are therefore
+# allowed, except the ByteDance scraper (no citation value for a Dutch
+# local business).
+#
+# Machine-readable site summary for AI systems:
+#   https://www.loodgieterjuffermans.nl/llms.txt
+#   https://www.loodgieterjuffermans.nl/llms-full.txt
+
+# --- Traditional search engines -----------------------------------------
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# --- AI search / answer engines (allow: these drive citations) ----------
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+
+User-agent: MistralAI-User
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+# --- AI training crawlers (business decision: allow) --------------------
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# --- Unwanted scrapers (block) ------------------------------------------
+User-agent: Bytespider
+Disallow: /
+
+# --- Everyone else --------------------------------------------------------
 User-agent: *
 Allow: /
 

@@ -2,37 +2,47 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.loodgieterjuffermans.nl/</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.loodgieterjuffermans.nl/diensten/zinkwerk</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.loodgieterjuffermans.nl/diensten/loodwerk</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.loodgieterjuffermans.nl/diensten/dakdekken</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.loodgieterjuffermans.nl/regio/haarlem</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.loodgieterjuffermans.nl/regio/heemstede</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.loodgieterjuffermans.nl/regio/bennebroek</loc>
-    <lastmod>2026-07-06</lastmod>
+    <lastmod>2026-11-01</lastmod>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.loodgieterjuffermans.nl/galerij</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.loodgieterjuffermans.nl/privacy</loc>
+    <lastmod>2026-11-01</lastmod>
+    <priority>0.3</priority>
   </url>
 </urlset>

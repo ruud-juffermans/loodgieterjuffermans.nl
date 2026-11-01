@@ -1,12 +1,14 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { imagetools } from 'vite-imagetools'
 import * as path from "path";
 import { fileURLToPath } from "url";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  plugins: [react()],
+  // imagetools: `?w=…&format=webp` imports resize and convert photos at build time
+  plugins: [react(), imagetools()],
   resolve: {
     alias: {
       '@components': path.resolve(dirname, './src/components'),

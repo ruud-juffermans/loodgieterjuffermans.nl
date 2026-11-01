@@ -4,12 +4,13 @@ import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlin
 import Section from "@components/Section";
 import Reveal from "@components/Reveal";
 
-import portretImage from "@assets/home2.jpeg";
+import portretImage from "@assets/home3.jpeg?w=1200&format=webp";
+import portretImageSet from "@assets/home3.jpeg?w=480;800;1200&format=webp&as=srcset";
 
 const HIGHLIGHTS = [
   "Specialist in zink- en loodwerk",
-  "Water, gas, CV, dakgoten en riool",
-  "Snel ter plaatse in Haarlem en Heemstede",
+  "Dakbedekking voor platte daken, dakkapellen en aanbouwen",
+  "Snel ter plaatse in Haarlem, Heemstede en Bennebroek",
   "Altijd één vast aanspreekpunt",
 ];
 
@@ -49,7 +50,9 @@ export default function OverMij() {
           <Box
             component="img"
             src={portretImage}
-            alt="Loodgieter Juffermans aan het werk"
+            srcSet={portretImageSet}
+            sizes="(min-width: 768px) 42vw, 100vw"
+            alt="Loodgieter Juffermans zet een zinken dakgoot op maat op zijn werkbank"
             loading="lazy"
             decoding="async"
             sx={{
@@ -71,10 +74,11 @@ export default function OverMij() {
             Een ambacht dat van generatie op generatie is doorgegeven
           </Section.Heading>
           <Section.Text>
-            Loodgietersbedrijf Juffermans richt zich op het oplossen van
-            loodgietersproblemen in Haarlem, Heemstede en omgeving. Als ervaren
-            loodgieter help ik u snel en efficiënt bij problemen met water,
-            gas, CV-installaties, dakgoten, zinkwerk en rioolwerk.
+            Loodgietersbedrijf Juffermans is gespecialiseerd in zinkwerk,
+            loodwerk en dakdekken in Haarlem, Heemstede, Bennebroek en
+            omgeving. Een lekkende dakgoot, versleten lood bij de schoorsteen
+            of een plat dak dat aan vervanging toe is: ik kom kijken en los
+            het op.
           </Section.Text>
           <Section.Text>
             Ik sta bekend om mijn klantgerichte aanpak en vakwerk. Bij mij

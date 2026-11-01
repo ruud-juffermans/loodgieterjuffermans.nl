@@ -1,21 +1,22 @@
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { alpha } from "@mui/material/styles";
-import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded";
-import MailOutlineRoundedIcon from "@mui/icons-material/MailOutlineRounded";
+import VerifiedUserOutlinedIcon from "@mui/icons-material/VerifiedUserOutlined";
+import AccessTimeRoundedIcon from "@mui/icons-material/AccessTimeRounded";
+import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
+import { BelDirectButton, WhatsAppButton } from "@components/CtaButtons";
 
-import heroImage from "@assets/hero1.jpeg";
+import heroImage from "@assets/hero1.jpeg?w=1600&format=webp&quality=72";
+import heroImageSet from "@assets/hero1.jpeg?w=800;1200;1600;1920&format=webp&quality=72&as=srcset";
 
-const PHONE_NUMBER = "0614149298";
-
-const TRUST_ITEMS = [
-  { value: "70+", label: "jaar familie-vakmanschap" },
-  { value: "1", label: "vast aanspreekpunt" },
-  { value: "Gratis", label: "offerte aan huis" },
+// Trust badges, copied from the live site.
+const TRUST_BADGES = [
+  { label: "Vakkundig & Betrouwbaar", icon: VerifiedUserOutlinedIcon },
+  { label: "Snel ter plaatse", icon: AccessTimeRoundedIcon },
+  { label: "Garantie op werk", icon: CheckCircleOutlineRoundedIcon },
 ];
 
 export default function Hero() {
@@ -33,29 +34,40 @@ export default function Hero() {
         bgcolor: "ink.900",
       }}
     >
-      {/* Background photo with a slow Ken Burns zoom */}
+      {/* Background photo with a slow zoom that settles after one run */}
       <Box
+        component="img"
+        src={heroImage}
+        srcSet={heroImageSet}
+        sizes="100vw"
+        alt=""
         aria-hidden="true"
+        fetchPriority="high"
+        decoding="async"
         sx={{
           position: "absolute",
           inset: 0,
-          backgroundImage: `url(${heroImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          animation: "heroZoom 26s ease-in-out infinite alternate",
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          objectPosition: "center",
+          animation: "heroZoom 20s ease-out 1 forwards",
           willChange: "transform",
         }}
       />
 
-      {/* Ink overlay for legibility, with drifting water-blue glows */}
+      {/* Ink overlay for legibility. On desktop it darkens the left where the
+          text sits and leaves the right open so the lead-dressing photo shows. */}
       <Box
         aria-hidden="true"
         sx={(theme) => ({
           position: "absolute",
           inset: 0,
-          background: `
-            linear-gradient(180deg, ${alpha(theme.palette.ink[900], 0.82)} 0%, ${alpha(theme.palette.ink[900], 0.68)} 55%, ${alpha(theme.palette.ink[900], 0.88)} 100%)
-          `,
+          background: {
+            xs: `linear-gradient(180deg, ${alpha(theme.palette.ink[900], 0.82)} 0%, ${alpha(theme.palette.ink[900], 0.68)} 55%, ${alpha(theme.palette.ink[900], 0.88)} 100%)`,
+            md: `linear-gradient(90deg, ${alpha(theme.palette.ink[900], 0.94)} 0%, ${alpha(theme.palette.ink[900], 0.86)} 42%, ${alpha(theme.palette.ink[900], 0.35)} 100%),
+              linear-gradient(180deg, ${alpha(theme.palette.ink[900], 0.25)} 0%, transparent 30%, transparent 70%, ${alpha(theme.palette.ink[900], 0.55)} 100%)`,
+          },
         })}
       />
       <Box
@@ -67,19 +79,18 @@ export default function Hero() {
             radial-gradient(1200px 600px at 15% 100%, ${alpha(theme.palette.accent[400], 0.28)}, transparent 60%),
             radial-gradient(900px 500px at 90% 0%, ${alpha(theme.palette.brand[400], 0.18)}, transparent 60%)
           `,
-          animation: "glowDrift 18s ease-in-out infinite",
         })}
       />
 
-      <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
+      <Container maxWidth="xl" sx={{ position: "relative", zIndex: 1 }}>
         <Stack
           spacing={4}
-          alignItems="center"
-          textAlign="center"
           sx={{
             py: { xs: 16, md: 20 },
-            maxWidth: 860,
-            mx: "auto",
+            maxWidth: { xs: 1860, md: 760 },
+            mx: { xs: "auto", md: 0 },
+            alignItems: { xs: "center", md: "flex-start" },
+            textAlign: { xs: "center", md: "left" },
             // Staggered entrance
             "& > *": {
               animation: "fadeUp 700ms cubic-bezier(0.22, 1, 0.36, 1) both",
@@ -89,27 +100,18 @@ export default function Hero() {
             "& > *:nth-of-type(4)": { animationDelay: "360ms" },
             "& > *:nth-of-type(5)": { animationDelay: "480ms" },
             "& > *:nth-of-type(6)": { animationDelay: "600ms" },
+            "& > *:nth-of-type(7)": { animationDelay: "720ms" },
           }}
         >
-          <Typography variant="overline" sx={{ color: "accent.300" }}>
+          <Typography
+            variant="overline"
+            sx={{ color: "accent.400", fontWeight: 800, fontSize: "0.875rem" }}
+          >
             Waterdicht de beste — Haarlem &amp; omgeving
           </Typography>
 
           <Typography variant="h1" sx={{ color: "common.white" }}>
-            Vakwerk in lood, zink{" "}
-            <Box
-              component="span"
-              sx={(theme) => ({
-                fontStyle: "italic",
-                background: `linear-gradient(100deg, ${theme.palette.accent[200]} 0%, ${theme.palette.accent[400]} 100%)`,
-                WebkitBackgroundClip: "text",
-                backgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                color: "accent.200",
-              })}
-            >
-              &amp; dakbedekking
-            </Box>
+            Loodgieter en dakdekker in Haarlem, Heemstede en Bennebroek
           </Typography>
 
           <Typography
@@ -120,9 +122,8 @@ export default function Hero() {
               maxWidth: 620,
             }}
           >
-            Loodgietersbedrijf Juffermans staat voor ambachtelijk werk dat de
-            tand des tijds doorstaat. Persoonlijk, betrouwbaar en altijd met
-            oog voor detail.
+            Loodgietersbedrijf Juffermans: specialist in zinkwerk, loodwerk en
+            dakdekken. Ook voor lekkages en dakgoten, snel ter plaatse in de regio.
           </Typography>
 
           <Stack
@@ -130,72 +131,64 @@ export default function Hero() {
             spacing={2}
             sx={{ pt: 1, width: { xs: "100%", sm: "auto" } }}
           >
-            <Button
-              component="a"
-              href={`tel:${PHONE_NUMBER}`}
-              variant="contained"
-              color="secondary"
-              size="large"
-              startIcon={<PhoneRoundedIcon />}
-            >
-              Bel 06 14 14 92 98
-            </Button>
-            <Button
-              component="a"
-              href="mailto:ronjut@hotmail.nl"
-              variant="outlined"
-              size="large"
-              startIcon={<MailOutlineRoundedIcon />}
-              sx={{
-                color: "common.white",
-                borderColor: alpha("#FFFFFF", 0.4),
-                "&:hover": {
-                  borderColor: "common.white",
-                  backgroundColor: alpha("#FFFFFF", 0.08),
-                },
-              }}
-            >
-              Stuur een e-mail
-            </Button>
+            <BelDirectButton />
+            <WhatsAppButton />
           </Stack>
 
-          <Stack alignItems="center" spacing={0.5} sx={{ pt: 2 }}>
-            <Rating value={5} readOnly size="small" />
+          <Typography
+            sx={{
+              color: "ink.200",
+              fontSize: "0.9375rem",
+              lineHeight: 1.6,
+              maxWidth: 560,
+              mt: "12px !important",
+            }}
+          >
+            Stuur gerust een foto via WhatsApp. Spoed? Ook buiten kantoortijden
+            bereikbaar. De offerte is gratis.
+          </Typography>
+
+          <Stack
+            spacing={0.5}
+            sx={{ pt: 2, alignItems: { xs: "center", md: "flex-start" } }}
+          >
+            <Rating
+              value={5}
+              readOnly
+              size="small"
+              getLabelText={(v) => `${v} van 5 sterren`}
+            />
             <Typography variant="caption" sx={{ color: "ink.200" }}>
               5.0 — beoordeeld door klanten uit de regio
             </Typography>
           </Stack>
 
-          {/* Trust bar */}
+          {/* Trust badges */}
           <Stack
             direction={{ xs: "column", sm: "row" }}
-            spacing={{ xs: 2.5, sm: 0 }}
+            spacing={{ xs: 2, sm: 4 }}
+            alignItems="center"
+            flexWrap="wrap"
             sx={{
+              justifyContent: { xs: "center", md: "flex-start" },
               mt: 4,
               width: "100%",
               maxWidth: 720,
               borderTop: `1px solid ${alpha("#FFFFFF", 0.15)}`,
               pt: 4,
-              "& > *": {
-                flex: 1,
-              },
             }}
           >
-            {TRUST_ITEMS.map((item) => (
-              <Stack key={item.label} spacing={0.5} alignItems="center">
-                <Typography
-                  sx={{
-                    fontFamily: '"Fraunces", Georgia, serif',
-                    fontSize: "1.75rem",
-                    fontWeight: 500,
-                    color: "common.white",
-                    lineHeight: 1,
-                  }}
-                >
-                  {item.value}
-                </Typography>
-                <Typography variant="caption" sx={{ color: "ink.200" }}>
-                  {item.label}
+            {TRUST_BADGES.map((badge) => (
+              <Stack
+                key={badge.label}
+                direction="row"
+                spacing={1}
+                alignItems="center"
+                sx={{ color: "common.white", opacity: 0.9 }}
+              >
+                <badge.icon sx={{ fontSize: 24, color: "accent.400" }} />
+                <Typography sx={{ fontSize: "0.9375rem", fontWeight: 600 }}>
+                  {badge.label}
                 </Typography>
               </Stack>
             ))}

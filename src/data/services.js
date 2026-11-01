@@ -1,15 +1,29 @@
-import ImgZinkwerk from "@assets/home1.jpeg";
-import ImgLoodwerk from "@assets/hero1.jpeg";
-import ImgLoodwerkDetail from "@assets/hero2.jpeg";
-import ImgDakdekken from "@assets/home3.jpeg";
+// WebP at the widths the layouts render; the originals stay as the source.
+import ImgZinkwerk from "@assets/home1.jpeg?w=1200&format=webp";
+import ImgZinkwerkSet from "@assets/home1.jpeg?w=480;800;1200&format=webp&as=srcset";
+import ImgLoodwerk from "@assets/hero1.jpeg?w=1200&format=webp";
+import ImgLoodwerkSet from "@assets/hero1.jpeg?w=480;800;1200&format=webp&as=srcset";
+import ImgLoodwerkDetail from "@assets/hero2.jpeg?w=1200&format=webp";
+import ImgLoodwerkDetailSet from "@assets/hero2.jpeg?w=480;800;1200&format=webp&as=srcset";
+import ImgDakdekken from "@assets/home3.jpeg?w=1200&format=webp";
+import ImgDakdekkenSet from "@assets/home3.jpeg?w=480;800;1200&format=webp&as=srcset";
+// Square crops for the 60px tiles on the homepage (2x for retina).
+import ThumbZinkwerk from "@assets/home1.jpeg?w=160&h=160&fit=cover&format=webp";
+import ThumbLoodwerk from "@assets/hero3.jpeg?w=160&h=160&fit=cover&position=left&format=webp";
+import ThumbDakdekken from "@assets/home3.jpeg?w=160&h=160&fit=cover&format=webp";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import RoofingOutlinedIcon from "@mui/icons-material/RoofingOutlined";
+import LayersOutlinedIcon from "@mui/icons-material/LayersOutlined";
 
 export const SERVICES = [
   {
     slug: "zinkwerk",
+    icon: HomeOutlinedIcon,
     title: "Zinkwerk",
     shortDescription:
-      "Met precisie en vakmanschap brengen we duurzaamheid en schoonheid samen in elk zinkwerkproject.",
-    metaTitle: "Zinkwerk in Haarlem e.o. | Loodgietersbedrijf Juffermans",
+      "Lekkende of verzakte dakgoot, losse regenpijp of een zinken dak dat aan vervanging toe is? Ik zet en soldeer nieuw zinkwerk op maat.",
+    h1: "Zinkwerk in Haarlem, Heemstede en Bennebroek",
+    metaTitle: "Zinkwerk & zinken dakgoten Haarlem e.o. | Juffermans",
     metaDescription:
       "Specialist in zinkwerk: zinken dakgoten, regenpijpen en maatwerk zetwerk. Vakkundig gezet en gesoldeerd in Haarlem, Heemstede en omgeving. Gratis offerte.",
     intro: [
@@ -25,15 +39,20 @@ export const SERVICES = [
       "Periodiek onderhoud en inspectie",
     ],
     image: ImgZinkwerk,
+    thumb: ThumbZinkwerk,
+    imageSrcSet: ImgZinkwerkSet,
     detailImage: ImgZinkwerk,
+    detailImageSrcSet: ImgZinkwerkSet,
     imageAlt: "Zinken dakgoot en zinkwerk aan een woning",
   },
   {
     slug: "loodwerk",
+    icon: RoofingOutlinedIcon,
     title: "Loodwerk",
     shortDescription:
-      "Vertrouw op onze deskundigheid voor nauwkeurig en betrouwbaar loodwerk dat de tand des tijds doorstaat.",
-    metaTitle: "Loodwerk in Haarlem e.o. | Loodgietersbedrijf Juffermans",
+      "Lekkage bij de schoorsteen, dakkapel of gevelaansluiting? Versleten lood is de meest voorkomende oorzaak. Ik vernieuw het vakkundig.",
+    h1: "Loodwerk in Haarlem, Heemstede en Bennebroek",
+    metaTitle: "Loodwerk & schoorsteenlood Haarlem e.o. | Juffermans",
     metaDescription:
       "Vakkundig loodwerk: loodslabben, schoorsteenlood en loketten. Ook restauratiewerk aan oudere panden in Haarlem, Heemstede en omgeving. Gratis offerte.",
     intro: [
@@ -49,15 +68,20 @@ export const SERVICES = [
       "Opsporen en verhelpen van lekkages",
     ],
     image: ImgLoodwerk,
+    thumb: ThumbLoodwerk,
+    imageSrcSet: ImgLoodwerkSet,
     detailImage: ImgLoodwerkDetail,
+    detailImageSrcSet: ImgLoodwerkDetailSet,
     imageAlt: "Traditioneel loodwerk rond een schoorsteen",
   },
   {
     slug: "dakdekken",
+    icon: LayersOutlinedIcon,
     title: "Dakdekken",
     shortDescription:
-      "Bescherm uw huis met professionele dakdekking, ontworpen voor maximale duurzaamheid en weerbestendigheid.",
-    metaTitle: "Dakdekken & dakbedekking | Loodgietersbedrijf Juffermans",
+      "Plat dak dat lekt of aan het eind van zijn levensduur is? Ik repareer of vernieuw de dakbedekking van erkers, aanbouwen en garages.",
+    h1: "Dakdekker in Haarlem, Heemstede en Bennebroek",
+    metaTitle: "Dakdekker Haarlem, Heemstede & Bennebroek | Juffermans",
     metaDescription:
       "Dakbedekking voor platte en hellende daken: bitumen, dakreparatie en dakrenovatie. Snel ter plaatse in Haarlem, Heemstede en omgeving. Gratis offerte.",
     intro: [
@@ -73,7 +97,10 @@ export const SERVICES = [
       "Dakinspectie en onderhoudsadvies",
     ],
     image: ImgDakdekken,
+    thumb: ThumbDakdekken,
+    imageSrcSet: ImgDakdekkenSet,
     detailImage: ImgDakdekken,
+    detailImageSrcSet: ImgDakdekkenSet,
     imageAlt: "Plat dak met bitumineuze dakbedekking",
   },
 ];

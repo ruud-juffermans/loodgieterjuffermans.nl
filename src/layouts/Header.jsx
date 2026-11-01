@@ -9,6 +9,7 @@ import {
   List,
   ListItemButton,
   ListItemText,
+  Stack,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -16,19 +17,20 @@ import { alpha } from "@mui/material/styles";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded";
 import useActiveSection from "@hooks/useActiveSection";
+import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded";
+import { BelDirectButton, WhatsAppButton } from "@components/CtaButtons";
+import { PHONE_TEL } from "@data/contact";
 
 import Logo from "@assets/logo.svg";
 
-const PHONE_NUMBER = "0614149298";
 
 const NAV_ITEMS = [
-  { label: "Home", id: "home", to: "/" },
   { label: "Over mij", id: "over-mij", to: "/#over-mij" },
-  { label: "Reviews", id: "reviews", to: "/#reviews" },
   { label: "Diensten", id: "diensten", to: "/#diensten" },
-  { label: "FAQ", id: "faq", to: "/#faq" },
+  { label: "Galerij", id: "galerij", to: "/galerij" },
+  { label: "Werkgebied", id: "werkgebied", to: "/#werkgebied" },
+  { label: "Contact", id: "contact", to: "/#contact" },
 ];
 
 const HEADER_HEIGHT = 88;
@@ -39,8 +41,10 @@ export default function Header() {
   const { pathname } = useLocation();
   const sectionIds = NAV_ITEMS.map((n) => n.id);
   const activeSection = useActiveSection(sectionIds);
-  // Section highlighting only applies on the homepage.
-  const active = pathname === "/" ? activeSection : null;
+  // Section highlighting applies on the homepage; the gallery page lights
+  // up its own menu item.
+  const active =
+    pathname === "/" ? activeSection : pathname === "/galerij" ? "galerij" : null;
 
   return (
     <AppBar
@@ -80,9 +84,9 @@ export default function Header() {
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
               <Typography
                 sx={{
-                  fontFamily: '"Fraunces", Georgia, serif',
+                  fontFamily: '"Plus Jakarta Sans", "Inter", sans-serif',
                   fontSize: "1.2rem",
-                  fontWeight: 600,
+                  fontWeight: 700,
                   lineHeight: 1.1,
                   color: "ink.800",
                 }}
@@ -94,7 +98,7 @@ export default function Header() {
                   fontSize: "0.7rem",
                   letterSpacing: "0.18em",
                   textTransform: "uppercase",
-                  color: "accent.600",
+                  color: "accent.700",
                   fontWeight: 600,
                 }}
               >
@@ -105,6 +109,8 @@ export default function Header() {
 
           {/* Desktop menu */}
           <Box
+            component="nav"
+            aria-label="Hoofdmenu"
             sx={{
               display: { xs: "none", lg: "flex" },
               gap: 0.5,
@@ -150,25 +156,35 @@ export default function Header() {
             ))}
           </Box>
 
-          {/* Desktop call-to-action */}
-          <Button
-            component="a"
-            href={`tel:${PHONE_NUMBER}`}
-            variant="contained"
-            color="secondary"
-            startIcon={<PhoneRoundedIcon />}
+          {/* Desktop call-to-action, same style as the hero buttons */}
+          <BelDirectButton
+            size="medium"
             sx={{
               display: { xs: "none", lg: "inline-flex" },
-              px: 3,
+              px: 2.5,
               py: 1.25,
+              fontSize: "0.9375rem",
             }}
+          />
+
+          {/* Mobile phone button (floating buttons are hidden on phones) */}
+          <IconButton
+            component="a"
+            href={`tel:${PHONE_TEL}`}
+            aria-label="Bel Loodgietersbedrijf Juffermans"
+            sx={(theme) => ({
+              display: { xs: "inline-flex", lg: "none" },
+              color: "common.white",
+              bgcolor: theme.palette.brand[500],
+              "&:hover": { bgcolor: theme.palette.brand[700] },
+            })}
           >
-            06 14 14 92 98
-          </Button>
+            <PhoneRoundedIcon />
+          </IconButton>
 
           {/* Mobile hamburger */}
           <IconButton
-            aria-label="Open menu"
+            aria-label="Menu openen"
             onClick={() => setOpen(true)}
             sx={{ display: { xs: "inline-flex", lg: "none" }, color: "ink.800" }}
           >
@@ -183,6 +199,7 @@ export default function Header() {
         open={open}
         onClose={() => setOpen(false)}
         PaperProps={{
+          "aria-label": "Navigatiemenu",
           sx: {
             width: 320,
             bgcolor: "ink.800",
@@ -194,16 +211,16 @@ export default function Header() {
         <Box sx={{ display: "flex", alignItems: "center", p: 2 }}>
           <Typography
             sx={{
-              fontFamily: '"Fraunces", Georgia, serif',
+              fontFamily: '"Plus Jakarta Sans", "Inter", sans-serif',
               fontSize: "1.25rem",
-              fontWeight: 500,
+              fontWeight: 700,
             }}
           >
             Menu
           </Typography>
           <Box sx={{ flex: 1 }} />
           <IconButton
-            aria-label="Close menu"
+            aria-label="Menu sluiten"
             onClick={() => setOpen(false)}
             sx={{ color: "common.white" }}
           >
@@ -211,6 +228,7 @@ export default function Header() {
           </IconButton>
         </Box>
 
+        <Box component="nav" aria-label="Mobiel menu">
         <List sx={{ px: 1 }}>
           {NAV_ITEMS.map((item) => (
             <ListItemButton
@@ -240,19 +258,12 @@ export default function Header() {
             </ListItemButton>
           ))}
         </List>
-
-        <Box sx={{ mt: "auto", p: 2 }}>
-          <Button
-            component="a"
-            href={`tel:${PHONE_NUMBER}`}
-            variant="contained"
-            color="secondary"
-            fullWidth
-            startIcon={<PhoneRoundedIcon />}
-          >
-            06 14 14 92 98
-          </Button>
         </Box>
+
+        <Stack spacing={1.5} sx={{ mt: "auto", p: 2 }}>
+          <BelDirectButton fullWidth />
+          <WhatsAppButton fullWidth />
+        </Stack>
       </Drawer>
     </AppBar>
   );
