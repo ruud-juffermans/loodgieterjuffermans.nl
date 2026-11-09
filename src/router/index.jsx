@@ -8,6 +8,7 @@ import PrivacyPage from "@pages/privacy";
 import GalerijPage from "@pages/galerij";
 import NotFound from "@pages/not-found";
 import Layout from "@layouts";
+import { recordPageView } from "../lib/analytics";
 
 const HEADER_HEIGHT = 88;
 
@@ -55,11 +56,24 @@ const ScrollManager = () => {
   return null;
 };
 
+/**
+ * Counts one page view per navigation (effects do not run during prerendering,
+ * so the static build sends nothing). Hash-only changes are not a new page.
+ */
+const PageViewTracker = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    recordPageView(pathname);
+  }, [pathname]);
+  return null;
+};
+
 /** Route table; wrapped in BrowserRouter (client) or StaticRouter (prerender). */
 const AppRoutes = () => {
   return (
     <>
       <ScrollManager />
+      <PageViewTracker />
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />

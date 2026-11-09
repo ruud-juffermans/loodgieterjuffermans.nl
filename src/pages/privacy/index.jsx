@@ -5,7 +5,7 @@ import Seo from "@components/Seo";
 import { ADDRESS, EMAIL, PHONE_DISPLAY, PHONE_TEL } from "@data/contact";
 
 const HEADER_HEIGHT = 88;
-const LAST_UPDATED = "1 november 2026";
+const LAST_UPDATED = "8 november 2026";
 
 function H2({ children }) {
   return (
@@ -20,7 +20,7 @@ export default function PrivacyPage() {
     <Box sx={{ pt: `${HEADER_HEIGHT}px` }}>
       <Seo
         title="Privacyverklaring | Loodgietersbedrijf Juffermans"
-        description="Hoe Loodgietersbedrijf Juffermans omgaat met uw gegevens: geen cookies, geen tracking, alleen de contactgegevens die u zelf deelt."
+        description="Hoe Loodgietersbedrijf Juffermans omgaat met uw gegevens: geen cookies, alleen een anonieme bezoekersteller en de contactgegevens die u zelf deelt."
         path="/privacy"
       />
 
@@ -43,11 +43,19 @@ export default function PrivacyPage() {
 
           <H2>Deze website plaatst geen cookies</H2>
           <Section.Text>
-            De website gebruikt geen cookies, geen analytics en geen
-            advertentie- of trackingscripts. Er wordt niets over uw bezoek
-            bijgehouden. De lettertypen worden geladen vanaf Google Fonts;
-            daarbij ontvangt Google het IP-adres van uw browser. Verder wordt
-            er bij het bekijken van de site geen informatie met derden gedeeld.
+            De website gebruikt geen cookies en geen advertentie- of
+            trackingscripts van derden. Wel houd ik een eenvoudige, anonieme
+            bezoekersteller bij op mijn eigen server: per bezochte pagina
+            worden de pagina, het tijdstip en de site waar u vandaan kwam
+            (bijvoorbeeld Google) opgeslagen. Uw IP-adres wordt daarbij niet
+            bewaard, er wordt geen cookie geplaatst en u bent niet te herkennen
+            of te volgen over andere websites. Heeft uw browser de instelling
+            &ldquo;Do Not Track&rdquo; aan, dan wordt uw bezoek niet geteld.
+          </Section.Text>
+          <Section.Text>
+            De lettertypen worden geladen vanaf Google Fonts; daarbij ontvangt
+            Google het IP-adres van uw browser. Verder wordt er bij het
+            bekijken van de site geen informatie met derden gedeeld.
           </Section.Text>
 
           <H2>Welke gegevens ik verwerk</H2>

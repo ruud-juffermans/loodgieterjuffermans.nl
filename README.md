@@ -24,6 +24,17 @@ npm run lint      # ESLint
 - `src/components/Seo` — per-pagina title/description/canonical/Open Graph
 - `public/` — `robots.txt`, `sitemap.xml`, favicon, OG-afbeelding, `.htaccess`
 
+## Bezoekersstatistieken
+
+`src/lib/analytics.js` stuurt per paginabezoek één cookieloze beacon (pad,
+taal, verwijzende site) naar het admin-panel (`api.ruudjuffermans.nl`,
+`POST /api/website/analytics`), dat het bezoek aan deze site toekent op basis
+van de `Origin`-header. De cijfers staan in het admin-panel onder
+"Loodgieter". In development wordt niets verstuurd, tenzij `VITE_API_URL`
+naar een lokaal draaiend panel wijst. "Do Not Track" wordt gerespecteerd en de
+privacyverklaring (`src/pages/privacy`) beschrijft precies wat er wordt
+bijgehouden.
+
 ## SEO
 
 - Statische meta tags, Open Graph en JSON-LD (`Plumber` + `FAQPage`) staan in `index.html`.
